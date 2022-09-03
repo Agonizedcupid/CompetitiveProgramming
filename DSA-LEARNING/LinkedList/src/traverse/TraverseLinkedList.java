@@ -40,6 +40,7 @@ public class TraverseLinkedList {
         third.next = fourth;
 
 
+
         //Now print the Linked List:
         //creating the Node to traverse all:
         Node traverse = head; // it means we will start traversing from head:
