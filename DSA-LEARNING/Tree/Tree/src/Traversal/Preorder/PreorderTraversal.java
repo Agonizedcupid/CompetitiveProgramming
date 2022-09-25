@@ -1,5 +1,7 @@
 package Traversal.Preorder;
 
+import java.util.Stack;
+
 public class PreorderTraversal {
     public static void main(String[] args) {
         BinaryTree tree = new BinaryTree();
@@ -9,8 +11,10 @@ public class PreorderTraversal {
         tree.root.leftSubTree.rightSubTree = new Node(6);
         tree.root.rightSubTree = new Node(9);
 
-        //Call the traversal:
-        tree.preOrderTraversal(tree.root);
+        //Call the traversal: (Recursive)
+        //tree.preOrderTraversal(tree.root);
+
+        tree.preOrderIterativeApproach(tree.root);
     }
 }
 
@@ -31,6 +35,27 @@ class BinaryTree {
         //Traversing through the RightSub Tree
         preOrderTraversal(root.rightSubTree);
     }
+
+    public void preOrderIterativeApproach(Node root) {
+
+        if (root == null) return;
+
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.empty()) {
+            Node peekNode = stack.peek();
+            System.out.print(peekNode.value + " ");
+            stack.pop();
+
+            if (peekNode.rightSubTree != null) {
+                stack.push(peekNode.rightSubTree);
+            }
+            if (peekNode.leftSubTree != null) {
+                stack.push(peekNode.leftSubTree);
+            }
+        }
+    }
+
 }
 
 class Node {
