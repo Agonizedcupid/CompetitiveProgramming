@@ -1,0 +1,16 @@
+There has Five (5) states of a thread:
+    1. New : It means a thread has just created. Code is not executed yet.
+    2. Runnable: It means Code is ready to execute / Thread is ready to execute.
+    3. Blocked: When a thread is temporarily inactive. It has the following states:
+        a) Blocked
+        b) Waiting
+    4. Timed-Waiting: When a method calls a time-out parameter. it will be that state until a notification is received or
+       timeout is completed. Example:
+        a)Thread.sleep():
+        b)Object.wait with timeout:
+        c)Thread.join with timeout:
+        d)LockSupport.parkNanos:
+        e)LockSupport.parkUtil
+    5. Terminated: it can has two phase.
+        a) Normally terminated means execution is completed.
+        b) Maybe happens some unusual things like the segmentation faults or unhandled exceptions.
