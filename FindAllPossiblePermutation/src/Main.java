@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        String letters = "abc";
+        String letters = "3377";
         List<String> list = generateAllPermutation(0, letters);
         for (int i = 0; i < list.size(); i++) {
             System.out.print(list.get(i) + " ");
@@ -22,7 +22,7 @@ public class Main {
 
         if (position == letters.length()) {
             list.add(letters);
-            System.out.println(letters);
+            //System.out.println(letters);
         } else {
             for (int i = position; i < letters.length(); i++) {
                 letters = swapping(position, i, letters);
