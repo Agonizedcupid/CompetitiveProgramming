@@ -6,6 +6,7 @@ public class Main {
         System.out.println(maxProfit(array));
     }
 
+
     public static int maxProfit(int[] array) {
         int maxProfit = 0;
 
