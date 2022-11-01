@@ -106,7 +106,8 @@ public class SingleLinkedList {
         //Move -> stop before position
         ListNode toDelete = head;
         if (position == 0) {
-            head.next = toDelete;
+            head = toDelete.next;
+            head = reverse(head);
             return;
         }
 
