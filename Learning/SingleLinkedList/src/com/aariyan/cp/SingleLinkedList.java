@@ -77,8 +77,12 @@ public class SingleLinkedList {
         toDeleteNode.next = removeFromMemory.next;
         removeFromMemory = null;
 
+        //Just reverse again the Linked List to get the original Linked List
+        head = reverse(head);
+
     }
 
+    //Searching
     public boolean isFound(ListNode head, int valueToFind) {
         ListNode currentNode = head;
         while (currentNode != null) {
@@ -88,6 +92,51 @@ public class SingleLinkedList {
             currentNode = currentNode.next;
         }
         return false;
+    }
+
+    public void deleteNthNode(int position) {
+
+        if (head == null ) return;
+        //Creating a dummy Head to connect with the original head
+        //It means dummy head remaining immediate before the original head:
+        ListNode beforeHead = new ListNode(0);
+        beforeHead.next = head;
+
+        head = reverse(beforeHead.next);
+        //Move -> stop before position
+        ListNode toDelete = head;
+        if (position == 0) {
+            head = toDelete.next;
+            head = reverse(head);
+            return;
+        }
+
+        for (int i = 1; i <= position - 1 & toDelete != null; i++) {
+            toDelete = toDelete.next;
+        }
+
+        //if position not found
+        if (toDelete == null || toDelete.next == null) {
+            return;
+        }
+        ListNode removeNode = toDelete.next;
+        toDelete.next = removeNode.next;
+        removeNode = null;
+
+        head = reverse(head);
+    }
+
+    public ListNode reverse(ListNode head) {
+        ListNode beforeHead = null, currentHead = head, nextHead = head.next;
+        while (currentHead != null) {
+            currentHead.next = beforeHead;
+            beforeHead = currentHead;
+            currentHead = nextHead;
+            if (nextHead != null) {
+                nextHead = nextHead.next;
+            }
+        }
+        return beforeHead;
     }
 
     public void sortLinkedList(ListNode head) {
