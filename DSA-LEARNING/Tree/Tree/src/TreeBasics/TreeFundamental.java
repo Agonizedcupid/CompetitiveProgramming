@@ -32,6 +32,15 @@ public class TreeFundamental {
         adjacentList.get(7).add(4);
 
         //Print parent of all node:
-        new Fundamental().printParentOfEachNode(root, adjacentList, 0);
+        //new Fundamental().printParentOfEachNode(root, adjacentList, 0);
+
+        //print all the child of each parent:
+        //new Fundamental().printChildOfEachNode(root, adjacentList, 0);
+
+        //print all the child of each parent by BFS:
+        //new Fundamental().printChildOfEachNodeByBFS(root,adjacentList);
+
+        // print the leaf node:
+        new Fundamental().printLeafNode(root, adjacentList);
     }
 }
