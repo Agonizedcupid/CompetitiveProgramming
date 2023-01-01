@@ -68,11 +68,24 @@ public class Main {
         int firstCrossTotal = firstItem + fourthItem;
         int secondCrossTotal = secondItem + thirdItem;
         if (firstCrossTotal < secondCrossTotal) {
-            System.out.println("Person ( "+(1) + " ) Completed : " + firstCrossTotal);
-            System.out.println("Person ( "+(2) + " ) Completed : " + secondCrossTotal);
+            if (firstItem < secondItem) {
+                System.out.println("Person ( "+(1) + " ) Completed : " + firstItem);
+                System.out.println("Person ( "+(2) + " ) Completed : " + fourthItem);
+            } else {
+                System.out.println("Person ( "+(1) + " ) Completed : " + fourthItem);
+                System.out.println("Person ( "+(2) + " ) Completed : " + firstItem);
+            }
+
         } else {
-            System.out.println("Person ( "+(1) + " ) Completed : " + secondCrossTotal);
-            System.out.println("Person ( "+(2) + " ) Completed : " + firstCrossTotal);
+//            System.out.println("Person ( "+(1) + " ) Completed : " + secondCrossTotal);
+//            System.out.println("Person ( "+(2) + " ) Completed : " + firstCrossTotal);
+            if (secondItem < thirdItem) {
+                System.out.println("Person ( "+(1) + " ) Completed : " + secondItem);
+                System.out.println("Person ( "+(2) + " ) Completed : " + thirdItem);
+            } else {
+                System.out.println("Person ( "+(1) + " ) Completed : " + thirdItem);
+                System.out.println("Person ( "+(2) + " ) Completed : " + secondItem);
+            }
         }
         for (int index = 0; index < numberOfJobsFoundToComplete.size(); index ++) {
             System.out.println("Person ( "+(index + 3) + " ) Completed : " + numberOfJobsFoundToComplete.get(index));
