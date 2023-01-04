@@ -49,6 +49,12 @@ public class Main {
     public static int rowWiseTotalSumForDuplicateSmallestNumber = -1;
     public static Map<String, Integer> map = new HashMap<>();
     public static List<String> listOfMatrix = new ArrayList<>();
+    public static String[] resultArray;
+    public static int minVal = Integer.MAX_VALUE;
+    public static int firstValueChecker = 0;
+    public static int secondValueChecker = 0;
+    public static int value1 = 0;
+    public static int value2 = 0;
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -56,6 +62,7 @@ public class Main {
 
         System.out.println("How many persons: ");
         numberOfPerson = input.nextInt();
+        resultArray = new String[numberOfPerson];
         System.out.println("How many jobs: ");
         numberOfJobs = input.nextInt();
         rowWiseMatrixSum = new int[numberOfJobs];
@@ -103,7 +110,7 @@ public class Main {
 
         int traverse = 0;
         while (!countMatrixDimensions()) {
-            System.out.println("BOOL: " + countMatrixDimensions());
+            //System.out.println("BOOL: " + countMatrixDimensions());
             //finding the biggest number in matrix:
             biggestNumber = findBiggestNumber(true);
             // Find all the biggest number at once and negate the biggest to track:
@@ -112,7 +119,8 @@ public class Main {
 
             traverseWholeMatrixToFindRestrictedRow();
             //numberOfJobsFoundToComplete.add(finalBlockedRow, smallestNumberFromRestrictedRow);
-            System.out.println("RESULT: " + smallestNumberFromRestrictedRow);
+            //System.out.println("RESULT: " + smallestNumberFromRestrictedRow + " Row: "+finalBlockedRow);
+            resultArray[finalBlockedRow] = "" + smallestNumberFromRestrictedRow;
             negateRestrictedRow_N_Column();
             traverse++;
             System.out.println("Traverse: " + traverse);
@@ -123,9 +131,10 @@ public class Main {
         markPositiveOfEachNumber();
         printMatrix();
         populateNewMatrix();
-        for (String index : listOfMatrix) {
-            System.out.print(index + " ");
+        for (int index = 0; index < resultArray.length; index ++) {
+            System.out.println("Person "+(index + 1) + " :   "+resultArray[index]);
         }
+        System.out.println();
 
         //printResult();
 
@@ -195,42 +204,44 @@ public class Main {
     }
 
     private static void populateNewMatrix() {
-
-        int row = 0, column = 0;
-        int sum = 0;
-        for (int i = 0; i < numberOfPerson; i++) {
-            sum = 0;
-            for (int j = 0; j < numberOfJobs; j++) {
-                if (row != j) {
-                    sum += matrix[row][column] + matrix[j][1];
-                    System.out.println(matrix[row][column] + " - "+matrix[j][1]);
+        for (int row = 0; row < numberOfPerson; row++) {
+            for (int column = 0; column < numberOfJobs; column++) {
+                if (matrix[row][column] != 0) {
+                    map.put(row + "-" + column, matrix[row][column]);
                 }
             }
-            System.out.println("SDF: " + sum);
-            sum = 0;
-            row++;
         }
-
-//        int takenRow = 0;
-//        int takenColumn = 0;
-//        List<Integer> list = new ArrayList<>();
-//        int sum = 0;
-//        for (int row = 0; row < numberOfJobs; row ++) {
-//            for (int column = 0; column < numberOfJobs - 1; column ++) {
-//                if (row == 0 && column == 0) {
-//                    sum += matrix[takenRow][takenColumn];
-//                } else {
-//                    sum += matrix[takenRow + 1][column + 1];
-//                }
-//
-//            }
-//            list.add(sum);
-//
-//        }
-//
-//        for (Integer index : list) {
-//            System.out.println("SUMMATION: " + index);
-//        }
+        for (Map.Entry<String, Integer> val : map.entrySet()) {
+            //System.out.print(val.getKey() + " == " + val.getValue() + "\n");
+            String singleCode = val.getKey();
+            int value = val.getValue();
+            String[] splitRes = singleCode.split("-");
+            int sum = 0,tempVal = 0;
+            int temp = 0;
+            for (Map.Entry<String, Integer> button : map.entrySet()) {
+                if (!button.getKey().contains(splitRes[0]) && !button.getKey().contains(splitRes[1])) {
+                    tempVal = button.getValue();
+                    sum = value + button.getValue();
+                    String[] t = button.getKey().split("-");
+                    temp = Integer.parseInt(t[0]);
+                }
+            }
+            //System.out.println("SUM: "+sum);
+            //System.out.println("MINA: "+value1 + " - "+value2);
+            if (sum < minVal) {
+                minVal = sum;
+                value1 = value;
+                value2 = tempVal;
+                firstValueChecker = Integer.parseInt(splitRes[0]);
+                secondValueChecker = temp;
+            }
+        }
+//        System.out.println("MIN: "+minVal);
+//        System.out.print("CHECKER: "+firstValueChecker + " - "+secondValueChecker);
+//        System.out.print("CHECKER: "+value1 + " - "+value2);
+//        System.out.println();
+        resultArray[firstValueChecker] = "" + value1;
+        resultArray[secondValueChecker] = "" + value2;
     }
 
     private static void markPositiveOfEachNumber() {
