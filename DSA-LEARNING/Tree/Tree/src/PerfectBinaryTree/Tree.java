@@ -1,5 +1,11 @@
 package PerfectBinaryTree;
 
+import com.sun.javafx.collections.MappingChange;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
 public class Tree {
 
     public Node rootNode;
@@ -34,7 +40,13 @@ public class Tree {
             depth ++;
             rootNode = rootNode.leftChild;
         }
+
+        String s = "sdgasdfg";
+        Map<Integer, Integer> contain = new HashMap<>();
+        contain.put(contain.get(s.charAt(0)),contain.getOrDefault(s.charAt(0),0) + 1);
         return depth;
+
+
     }
 
     public boolean wrapperFunction (Node rootNode) {
